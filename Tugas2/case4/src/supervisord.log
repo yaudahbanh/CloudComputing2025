@@ -1,0 +1,16 @@
+2025-11-04 16:13:19,810 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2025-11-04 16:13:19,815 INFO supervisord started with pid 7
+2025-11-04 16:13:20,817 INFO spawned: 'apache' with pid 8
+2025-11-04 16:13:20,853 DEBG 'apache' stderr output:
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.5. Set the 'ServerName' directive globally to suppress this message
+
+2025-11-04 16:13:20,856 DEBG fd 8 closed, stopped monitoring <POutputDispatcher at 140559097750672 for <Subprocess at 140559098288112 with name apache in state STARTING> (stderr)>
+2025-11-04 16:13:21,860 INFO success: apache entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-11-04 16:15:03,340 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2025-11-04 16:15:03,345 INFO supervisord started with pid 7
+2025-11-04 16:15:04,352 INFO spawned: 'apache' with pid 8
+2025-11-04 16:15:04,386 DEBG 'apache' stderr output:
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.5. Set the 'ServerName' directive globally to suppress this message
+
+2025-11-04 16:15:04,387 DEBG fd 8 closed, stopped monitoring <POutputDispatcher at 139705659876496 for <Subprocess at 139705660413936 with name apache in state STARTING> (stderr)>
+2025-11-04 16:15:05,389 INFO success: apache entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

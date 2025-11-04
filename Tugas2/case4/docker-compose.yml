@@ -1,0 +1,65 @@
+services:
+  mysql1:
+    image: mysql:5.7-debian
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=mydb
+      - MYSQL_PASSWORD=mydb6789tyui
+      - MYSQL_ROOT_PASSWORD=mydb6789tyui
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - dbdata:/var/lib/mysql         # named volume (avoid host FS perms issues)
+      - ./dbscripts:/dbscripts:ro     # your backup/restore scripts
+    networks:
+      - example1-network
+
+  app:
+    restart: unless-stopped
+    build:
+      context: ./platform             # Dockerfile is in ./platform
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql1
+    ports:
+      - "34001:80"
+    environment:
+      - MODE=development
+      - MYSQL_DATABASE=mydb
+      - MYSQL_PASSWORD=mydb6789tyui
+      - MYSQL_ROOT_PASSWORD=mydb6789tyui
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./src:/var/www/html
+      - ./platform/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./platform/log:/var/log/apache2
+      - ./platform/start.sh:/tmp/start.sh:ro
+      - ./platform/supervisord.conf:/tmp/supervisord.conf:ro
+    extra_hosts:
+      - "test:10.199.2.29"
+    networks:
+      - example1-network
+
+  alpine:
+    image: alpine:3.18
+    command: ["/bin/sh","-c","while true; do sleep 10000; done"]
+    networks:
+      - example1-network
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    depends_on:
+      - mysql1
+    ports:
+      - "10000:80"
+    environment:
+      - PMA_HOST=mysql1
+      - MYSQL_ROOT_PASSWORD=mydb6789tyui
+    networks:
+      - example1-network
+
+networks:
+  example1-network:
+    driver: bridge
+
+volumes:
+  dbdata:
