@@ -1,0 +1,1 @@
+docker build -t mywebserver:2.0 -f Dockerfile ../../Tugas2/case1

@@ -1,0 +1,1 @@
+docker run -d -p 5000:5000 --name flask_container flaskapp:1.0

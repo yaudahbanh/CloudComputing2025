@@ -1,0 +1,1 @@
+docker build -t flaskapp:1.0 -f Dockerfile .
